@@ -206,17 +206,8 @@ footer a:hover {
   stroke-width: 2;
 }
 
-.hero-panel {
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.78);
-  box-shadow: var(--shadow);
-  overflow: hidden;
-}
-
 .hero-side {
   display: grid;
-  gap: 18px;
   width: min(360px, 100%);
   justify-self: start;
 }
@@ -235,38 +226,6 @@ footer a:hover {
   height: auto;
   object-fit: contain;
   background: var(--paper);
-}
-
-.hero-side .panel-topline {
-  padding: 16px 18px;
-}
-
-.hero-side .pipeline-card {
-  gap: 8px;
-  padding: 16px 18px;
-}
-
-.hero-side .pipeline-step {
-  min-height: 54px;
-  padding: 10px 12px;
-}
-
-.hero-side .pipeline-card i {
-  height: 12px;
-}
-
-.panel-topline {
-  display: flex;
-  justify-content: flex-start;
-  gap: 18px;
-  padding: 22px;
-  border-bottom: 1px solid var(--line);
-  color: var(--muted);
-  font-size: 0.9rem;
-}
-
-.panel-topline strong {
-  color: var(--text);
 }
 
 .focus-grid {
@@ -304,53 +263,6 @@ footer a:hover {
   margin-top: 12px;
   font-size: 1.05rem;
   line-height: 1.35;
-}
-
-.pipeline-card {
-  display: grid;
-  gap: 12px;
-  padding: 22px;
-}
-
-.pipeline-step {
-  display: grid;
-  grid-template-columns: 44px 1fr;
-  align-items: center;
-  gap: 14px;
-  min-height: 66px;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: white;
-  padding: 14px;
-}
-
-.pipeline-step span {
-  display: inline-grid;
-  width: 38px;
-  height: 38px;
-  place-items: center;
-  border-radius: 8px;
-  background: var(--accent-soft);
-  color: var(--accent-dark);
-  font-size: 0.82rem;
-  font-weight: 900;
-}
-
-.pipeline-step strong {
-  color: var(--text);
-  font-size: 1rem;
-}
-
-.final-step {
-  border-color: rgba(15, 109, 143, 0.5);
-  background: linear-gradient(135deg, #ffffff, var(--accent-soft));
-}
-
-.pipeline-card i {
-  width: 2px;
-  height: 18px;
-  margin-left: 32px;
-  background: var(--accent);
 }
 
 .split {

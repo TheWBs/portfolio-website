@@ -105,8 +105,9 @@ const projects = [
 const navItems = [
   ['About', '#about'],
   ['Skills', '#skills'],
-  ['Projects', '#projects'],
   ['Experience', '#experience'],
+  ['Education', '#education'],
+  ['Projects', '#projects'],
   ['Recommendation', '#recommendation'],
   ['Contact', '#contact'],
 ];
@@ -197,22 +198,6 @@ function Hero() {
         <figure className="profile-card">
           <img src={profilePhoto} alt="Jokūbas Griežė profile portrait" loading="eager" />
         </figure>
-        <div className="hero-panel recruiter-pipeline" aria-label="Recruiter review pipeline">
-          <div className="panel-topline">
-            <span>Recruiter Pipeline</span>
-          </div>
-          <div className="pipeline-card">
-            {['Open page', 'Be amazed', 'Hire me'].map((step, index) => (
-              <Fragment key={step}>
-                <div className={index === 2 ? 'pipeline-step final-step' : 'pipeline-step'}>
-                  <span>{String(index + 1).padStart(2, '0')}</span>
-                  <strong>{step}</strong>
-                </div>
-                {index < 2 ? <i aria-hidden="true" /> : null}
-              </Fragment>
-            ))}
-          </div>
-        </div>
       </div>
     </section>
   );
@@ -498,9 +483,9 @@ function App() {
         <Hero />
         <About />
         <Skills />
-        <Projects />
         <Experience />
         <Education />
+        <Projects />
         <Recommendation />
         <Contact />
       </main>
