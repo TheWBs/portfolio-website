@@ -115,9 +115,9 @@ footer a:hover {
 
 .hero {
   display: grid;
-  grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.75fr);
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 0.68fr);
   align-items: center;
-  gap: 56px;
+  gap: 36px;
   min-height: calc(100vh - 78px);
   padding-top: 48px;
 }
@@ -217,6 +217,8 @@ footer a:hover {
 .hero-side {
   display: grid;
   gap: 18px;
+  width: min(360px, 100%);
+  justify-self: start;
 }
 
 .profile-card {
@@ -799,7 +801,7 @@ footer a {
   }
 
   .hero-side {
-    max-width: 520px;
+    width: min(520px, 100%);
   }
 }
 
