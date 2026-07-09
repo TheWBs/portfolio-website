@@ -142,7 +142,7 @@ function Header() {
   return (
     <header className="site-header">
       <a className="brand" href="#top" aria-label="Jokūbas Griežė home">
-        JG
+        {'<JG/>'}
       </a>
       <nav aria-label="Primary navigation">
         {navItems.map(([label, href]) => (

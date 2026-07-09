@@ -67,15 +67,17 @@ img {
 
 .brand {
   display: inline-grid;
-  width: 42px;
+  width: 58px;
   height: 42px;
   place-items: center;
   border: 1px solid var(--line);
   border-radius: 8px;
   background: var(--paper);
   color: var(--accent-dark);
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
   font-weight: 800;
-  letter-spacing: 0.02em;
+  font-size: 0.92rem;
+  letter-spacing: -0.03em;
 }
 
 nav {
@@ -755,7 +757,7 @@ footer a {
   }
 
   .brand {
-    width: 38px;
+    width: 54px;
     height: 38px;
     flex: 0 0 auto;
   }
