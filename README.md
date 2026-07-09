@@ -124,6 +124,6 @@ git push -u origin main
 
 - The site is in English.
 - The phone number can be shown publicly because it was explicitly requested.
-- The Prodivi internship is the only experience item from the CV.
+- Prodivi internship and KASP volunteering are the experience items shown.
 - No completed certifications are listed because the provided files did not prove any.
 - Project impact is stated only where supported by repository README content or the CV.

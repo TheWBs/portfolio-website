@@ -1,4 +1,4 @@
-import { Fragment } from 'react';
+import { Fragment, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import './styles.css';
 
@@ -14,12 +14,12 @@ const contact = {
 
 const skills = [
   {
-    group: 'BI & Visualization',
-    items: ['Power BI', 'DAX', 'Power Query', 'Power BI Service', 'Excel', 'KPI reporting'],
-  },
-  {
     group: 'SQL & Data Modeling',
     items: ['SQL', 'Star schema', 'Data modeling', 'SQL Server', 'PostgreSQL', 'MySQL', 'MariaDB'],
+  },
+  {
+    group: 'BI & Visualization',
+    items: ['Power BI', 'DAX', 'Power Query', 'Power BI Service', 'Excel', 'KPI reporting'],
   },
   {
     group: 'Data Engineering / Cloud',
@@ -82,8 +82,8 @@ const projects = [
     name: 'CNN Image Classification',
     type: 'Reproducible machine learning experiments',
     repo: 'https://github.com/TheWBs/cnn-image-classification',
-    image: asset('assets/projects/cnn/task1-model-comparison.png'),
-    imageAlt: 'CNN model comparison chart from image classification project',
+    image: asset('assets/projects/cnn/custom-model-layer-flow.png'),
+    imageAlt: 'Custom CNN model layer flow diagram from image classification project',
     problem:
       'Compare image-classification approaches and understand the impact of architecture choice, transfer learning, and dataset size.',
     built:
@@ -99,8 +99,26 @@ const navItems = [
   ['Skills', '#skills'],
   ['Projects', '#projects'],
   ['Experience', '#experience'],
+  ['Recommendation', '#recommendation'],
   ['Contact', '#contact'],
 ];
+
+function copyToClipboard(text) {
+  if (navigator.clipboard?.writeText) {
+    return navigator.clipboard.writeText(text);
+  }
+
+  const field = document.createElement('textarea');
+  field.value = text;
+  field.setAttribute('readonly', '');
+  field.style.position = 'fixed';
+  field.style.opacity = '0';
+  document.body.appendChild(field);
+  field.select();
+  document.execCommand('copy');
+  document.body.removeChild(field);
+  return Promise.resolve();
+}
 
 function ArrowIcon() {
   return (
@@ -132,6 +150,14 @@ function Header() {
 }
 
 function Hero() {
+  const [emailStatus, setEmailStatus] = useState('Copy email');
+
+  const handleEmailCopy = async () => {
+    await copyToClipboard(contact.email);
+    setEmailStatus('Email copied');
+    window.setTimeout(() => setEmailStatus('Copy email'), 2200);
+  };
+
   return (
     <section className="hero section" id="top">
       <div className="hero-copy">
@@ -151,33 +177,29 @@ function Hero() {
           <a className="button secondary" href={contact.github} target="_blank" rel="noreferrer">
             GitHub
           </a>
-          <a className="button secondary" href={`mailto:${contact.email}`}>
-            Email
-          </a>
+          <button className="button secondary" type="button" onClick={handleEmailCopy}>
+            {emailStatus}
+          </button>
         </div>
+        <p className="copy-status" aria-live="polite">
+          {emailStatus === 'Email copied' ? `${contact.email} copied to clipboard` : ''}
+        </p>
       </div>
-      <div className="hero-panel" aria-label="Portfolio focus summary">
+      <div className="hero-panel recruiter-pipeline" aria-label="Recruiter review pipeline">
         <div className="panel-topline">
-          <span>Portfolio focus</span>
-          <strong>BI + Data Engineering</strong>
+          <span>Recruiter ETL</span>
+          <strong>Page view to interview</strong>
         </div>
-        <div className="focus-grid">
-          <div>
-            <span>Reports</span>
-            <strong>Power BI, DAX, KPIs</strong>
-          </div>
-          <div>
-            <span>Models</span>
-            <strong>Star schema, SQL, relationships</strong>
-          </div>
-          <div>
-            <span>Pipelines</span>
-            <strong>Kafka, Spark, Airflow, Docker</strong>
-          </div>
-          <div>
-            <span>Cloud</span>
-            <strong>Fabric, Dataflows, BigQuery</strong>
-          </div>
+        <div className="pipeline-card">
+          {['Open page', 'Scan projects', 'Check CV', 'Book interview'].map((step, index) => (
+            <Fragment key={step}>
+              <div className={index === 3 ? 'pipeline-step final-step' : 'pipeline-step'}>
+                <span>{String(index + 1).padStart(2, '0')}</span>
+                <strong>{step}</strong>
+              </div>
+              {index < 3 ? <i aria-hidden="true" /> : null}
+            </Fragment>
+          ))}
         </div>
       </div>
     </section>
@@ -222,7 +244,7 @@ function About() {
 function Skills() {
   return (
     <section className="section" id="skills">
-      <SectionHeading eyebrow="Skills" title="Tools grouped by how recruiters scan data roles." />
+      <SectionHeading eyebrow="Skills" title="Tools I use to build useful data products." />
       <div className="skill-grid">
         {skills.map((group) => (
           <article className="skill-card" key={group.group}>
@@ -260,10 +282,9 @@ function ProjectVisual({ project }) {
 function Projects() {
   return (
     <section className="section projects-section" id="projects">
-      <SectionHeading eyebrow="Projects" title="Selected work with evidence from CV and GitHub.">
+      <SectionHeading eyebrow="Projects" title="Selected data and analytics projects.">
         <p>
-          These are the strongest job-relevant projects from the CV, LinkedIn material, and public GitHub
-          repositories.
+          A mix of BI reporting, streaming pipelines, semantic search, and reproducible machine learning work.
         </p>
       </SectionHeading>
       <div className="project-list">
@@ -285,7 +306,7 @@ function Projects() {
                   <dd>{project.built}</dd>
                 </div>
                 <div>
-                  <dt>Result / evidence</dt>
+                  <dt>Outcome</dt>
                   <dd>{project.result}</dd>
                 </div>
               </dl>
@@ -308,7 +329,7 @@ function Projects() {
 function Experience() {
   return (
     <section className="section split" id="experience">
-      <SectionHeading eyebrow="Experience" title="Relevant experience from the CV." />
+      <SectionHeading eyebrow="Experience" title="Relevant experience." />
       <div className="timeline">
         <article className="timeline-item">
           <div>
@@ -322,7 +343,46 @@ function Experience() {
             <li>Communicated with clients to clarify reporting requirements and data-related questions.</li>
           </ul>
         </article>
+        <article className="timeline-item">
+          <div>
+            <h3>Infantry Soldier</h3>
+            <p>KASP · Jun 2025 - Present · Lithuanian National Defence Volunteer Forces</p>
+          </div>
+          <p>
+            Volunteer Soldier — Lithuanian National Defence Volunteer Forces (KASP). Serving as a volunteer in
+            the Lithuanian National Defence Volunteer Forces, developing discipline, teamwork, responsibility
+            and resilience through military training and service.
+          </p>
+        </article>
       </div>
+    </section>
+  );
+}
+
+function Recommendation() {
+  return (
+    <section className="section recommendation-section" id="recommendation">
+      <SectionHeading eyebrow="Recommendation" title="What a colleague said." />
+      <figure className="quote-card">
+        <blockquote>
+          <p>
+            “I had the opportunity to work with Jokūbas during his Data Analyst internship at Prodivi. He
+            showed strong motivation, curiosity and a responsible attitude toward his work. During the
+            internship, he worked with SQL, Power BI, DAX, data models and reporting logic, while also
+            contributing to analysis and documentation of data flows and business rules.
+          </p>
+          <p>
+            Jokūbas was eager to learn, asked thoughtful questions and showed a genuine interest in
+            understanding both data analytics and data engineering concepts. I believe he has a strong
+            foundation for roles in data analytics, BI or data engineering, and would be a valuable addition
+            to a team that values curiosity, learning and analytical thinking.”
+          </p>
+        </blockquote>
+        <figcaption>
+          <strong>Jolita Vekteriene</strong>
+          <span>Human Resources Manager at Prodivi, UAB · July 9, 2026</span>
+        </figcaption>
+      </figure>
     </section>
   );
 }
@@ -351,6 +411,14 @@ function Education() {
 }
 
 function Contact() {
+  const [emailStatus, setEmailStatus] = useState('Copy email');
+
+  const handleEmailCopy = async () => {
+    await copyToClipboard(contact.email);
+    setEmailStatus('Email copied');
+    window.setTimeout(() => setEmailStatus('Copy email'), 2200);
+  };
+
   return (
     <section className="section contact-section" id="contact">
       <div>
@@ -358,7 +426,9 @@ function Contact() {
         <h2>Open to data analyst, analytics engineer, BI, and junior data engineering roles.</h2>
       </div>
       <div className="contact-card">
-        <a href={`mailto:${contact.email}`}>{contact.email}</a>
+        <button type="button" onClick={handleEmailCopy}>
+          {emailStatus === 'Email copied' ? 'Email copied' : contact.email}
+        </button>
         <a href={`tel:${contact.phone}`}>{contact.phone}</a>
         <a href={contact.linkedin} target="_blank" rel="noreferrer">
           LinkedIn profile
@@ -385,6 +455,7 @@ function App() {
         <Projects />
         <Experience />
         <Education />
+        <Recommendation />
         <Contact />
       </main>
       <footer>
