@@ -558,13 +558,15 @@ dd {
 
 .education-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(240px, 360px);
+  grid-template-columns: minmax(0, 1fr) 220px;
   gap: 18px;
   margin-top: 30px;
 }
 
 .language-card {
-  width: min(100%, 360px);
+  width: 220px;
+  min-height: auto;
+  padding: 18px;
   justify-self: start;
 }
 
@@ -775,6 +777,10 @@ footer a {
   .skill-grid,
   .education-grid {
     grid-template-columns: 1fr;
+  }
+
+  .language-card {
+    width: 100%;
   }
 
   .focus-grid div,
