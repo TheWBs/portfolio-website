@@ -12,6 +12,12 @@ const contact = {
   cv: asset('assets/cv/jokubas-grieze-cv.pdf'),
 };
 
+const logos = {
+  prodivi: asset('assets/logos/prodivi-logo.svg'),
+  ktu: asset('assets/logos/ktu-logo.svg'),
+  kasp: asset('assets/logos/kasp-logo.svg'),
+};
+
 const skills = [
   {
     group: 'SQL & Data Modeling',
@@ -187,17 +193,17 @@ function Hero() {
       </div>
       <div className="hero-panel recruiter-pipeline" aria-label="Recruiter review pipeline">
         <div className="panel-topline">
-          <span>Recruiter ETL</span>
-          <strong>Page view to interview</strong>
+          <span>Recruiter Pipeline</span>
+          <strong>Healthy bit of optimism</strong>
         </div>
         <div className="pipeline-card">
-          {['Open page', 'Scan projects', 'Check CV', 'Book interview'].map((step, index) => (
+          {['Open page', 'Be amazed', 'Hire me'].map((step, index) => (
             <Fragment key={step}>
-              <div className={index === 3 ? 'pipeline-step final-step' : 'pipeline-step'}>
+              <div className={index === 2 ? 'pipeline-step final-step' : 'pipeline-step'}>
                 <span>{String(index + 1).padStart(2, '0')}</span>
                 <strong>{step}</strong>
               </div>
-              {index < 3 ? <i aria-hidden="true" /> : null}
+              {index < 2 ? <i aria-hidden="true" /> : null}
             </Fragment>
           ))}
         </div>
@@ -332,9 +338,12 @@ function Experience() {
       <SectionHeading eyebrow="Experience" title="Relevant experience." />
       <div className="timeline">
         <article className="timeline-item">
-          <div>
-            <h3>Intern Data Analyst</h3>
-            <p>PRODIVI, UAB · May 2026 - July 2026 · Kaunas, Lithuania</p>
+          <div className="timeline-heading">
+            <LogoBadge src={logos.prodivi} alt="PRODIVI logo" tone="dark" />
+            <div>
+              <h3>Intern Data Analyst</h3>
+              <p>PRODIVI, UAB · May 2026 - July 2026 · Kaunas, Lithuania</p>
+            </div>
           </div>
           <ul>
             <li>Worked on SQL and Power BI-based business intelligence solutions for client reporting projects.</li>
@@ -344,9 +353,12 @@ function Experience() {
           </ul>
         </article>
         <article className="timeline-item">
-          <div>
-            <h3>Infantry Soldier</h3>
-            <p>KASP · Jun 2025 - Present · Lithuanian National Defence Volunteer Forces</p>
+          <div className="timeline-heading">
+            <LogoBadge src={logos.kasp} alt="KASP logo" />
+            <div>
+              <h3>Infantry Soldier</h3>
+              <p>KASP · Jun 2025 - Present · Lithuanian National Defence Volunteer Forces</p>
+            </div>
           </div>
           <p>
             Volunteer Soldier — Lithuanian National Defence Volunteer Forces (KASP). Serving as a volunteer in
@@ -354,15 +366,36 @@ function Experience() {
             and resilience through military training and service.
           </p>
         </article>
+        <article className="timeline-item">
+          <div className="timeline-heading">
+            <LogoBadge text="π" alt="Mathematics tutor" />
+            <div>
+              <h3>Math Tutor</h3>
+              <p>Self-employed · Nov 2022 - Present</p>
+            </div>
+          </div>
+          <p>
+            With a strong background in mathematics, I help students understand difficult concepts through
+            clear explanations, logical thinking and practical problem-solving.
+          </p>
+        </article>
       </div>
     </section>
+  );
+}
+
+function LogoBadge({ src, alt, text, tone = 'light' }) {
+  return (
+    <span className={`logo-badge ${tone === 'dark' ? 'logo-badge-dark' : ''}`} aria-label={alt}>
+      {src ? <img src={src} alt={alt} loading="eager" /> : <strong>{text}</strong>}
+    </span>
   );
 }
 
 function Recommendation() {
   return (
     <section className="section recommendation-section" id="recommendation">
-      <SectionHeading eyebrow="Recommendation" title="What a colleague said." />
+      <SectionHeading eyebrow="Recommendation" title="Recommendations." />
       <figure className="quote-card">
         <blockquote>
           <p>
@@ -379,8 +412,11 @@ function Recommendation() {
           </p>
         </blockquote>
         <figcaption>
-          <strong>Jolita Vekteriene</strong>
-          <span>Human Resources Manager at Prodivi, UAB · July 9, 2026</span>
+          <LogoBadge src={logos.prodivi} alt="PRODIVI logo" tone="dark" />
+          <div>
+            <strong>Jolita Vekteriene</strong>
+            <span>Human Resources Manager at Prodivi, UAB · July 9, 2026</span>
+          </div>
         </figcaption>
       </figure>
     </section>
@@ -393,7 +429,10 @@ function Education() {
       <SectionHeading eyebrow="Education" title="Education and languages." />
       <div className="education-grid">
         <article>
-          <h3>Kaunas University of Technology</h3>
+          <div className="education-heading">
+            <LogoBadge src={logos.ktu} alt="KTU logo" />
+            <h3>Kaunas University of Technology</h3>
+          </div>
           <p>Bachelor of Applied Science, Data Science and Engineering</p>
           <p>2023 - to date</p>
           <p>
