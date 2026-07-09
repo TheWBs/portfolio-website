@@ -56,11 +56,13 @@ img {
   grid-template-columns: auto 1fr auto;
   align-items: center;
   gap: 24px;
-  width: min(1180px, calc(100% - 32px));
-  margin: 0 auto;
-  padding: 18px 0;
-  background: rgba(247, 250, 252, 0.86);
+  width: 100%;
+  margin: 0;
+  padding: 18px clamp(16px, 5vw, 72px);
+  border-bottom: 1px solid rgba(203, 220, 229, 0.72);
+  background: rgba(247, 250, 252, 0.94);
   backdrop-filter: blur(18px);
+  box-shadow: 0 10px 32px rgba(15, 61, 95, 0.06);
 }
 
 .brand {
@@ -578,6 +580,11 @@ dd {
   line-height: 1.6;
 }
 
+.degree strong {
+  color: var(--accent-dark);
+  font-weight: 900;
+}
+
 .timeline-item li {
   position: relative;
   padding: 8px 0 8px 18px;
@@ -720,6 +727,7 @@ footer a {
 @media (max-width: 1040px) {
   .site-header {
     grid-template-columns: auto 1fr;
+    padding-inline: 24px;
   }
 
   .header-link {
@@ -754,16 +762,38 @@ footer a {
 
 @media (max-width: 720px) {
   .site-header {
-    position: static;
+    position: sticky;
     display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 14px;
+    padding: 12px 16px;
   }
 
   nav {
-    max-width: 240px;
-    justify-content: flex-end;
+    flex: 1;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    gap: 12px;
+    max-width: none;
+    overflow-x: auto;
+    padding: 6px 0;
     font-size: 0.88rem;
+    scrollbar-width: none;
+  }
+
+  nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  nav a {
+    flex: 0 0 auto;
+  }
+
+  .brand {
+    width: 38px;
+    height: 38px;
+    flex: 0 0 auto;
   }
 
   .section {

@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">CNN image classification workflow</title>
+  <desc id="desc">Input image examples pass through convolution feature maps into a softmax classifier with class probabilities.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f8fbfd"/>
+      <stop offset="1" stop-color="#e3f3f7"/>
+    </linearGradient>
+    <linearGradient id="blue" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0f6d8f"/>
+      <stop offset="1" stop-color="#0f3d5f"/>
+    </linearGradient>
+    <linearGradient id="green" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#56b986"/>
+      <stop offset="1" stop-color="#127159"/>
+    </linearGradient>
+    <filter id="shadow" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#0f3d5f" flood-opacity=".14"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="760" rx="34" fill="url(#bg)"/>
+  <rect x="54" y="54" width="1092" height="652" rx="28" fill="#fff" stroke="#cbdce5" filter="url(#shadow)"/>
+
+  <text x="92" y="112" fill="#0f1f2e" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="40" font-weight="800">CNN Image Classification</text>
+  <text x="92" y="152" fill="#526574" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="22">From image pixels to class probabilities</text>
+
+  <g font-family="Inter, Segoe UI, Arial, sans-serif">
+    <text x="124" y="218" fill="#0f6d8f" font-size="16" font-weight="800" letter-spacing="2">INPUT IMAGES</text>
+    <rect x="92" y="240" width="112" height="112" rx="18" fill="#f6fbfd" stroke="#cbdce5"/>
+    <rect x="224" y="240" width="112" height="112" rx="18" fill="#f6fbfd" stroke="#cbdce5"/>
+    <rect x="356" y="240" width="112" height="112" rx="18" fill="#f6fbfd" stroke="#cbdce5"/>
+
+    <circle cx="148" cy="296" r="34" fill="#f7d45c"/>
+    <circle cx="132" cy="280" r="19" fill="#f29b61"/>
+    <circle cx="166" cy="278" r="18" fill="#e86d75"/>
+    <circle cx="168" cy="315" r="19" fill="#ca7bc0"/>
+    <circle cx="130" cy="316" r="17" fill="#7fbf7a"/>
+    <circle cx="148" cy="296" r="11" fill="#7a5b25"/>
+
+    <path d="M250 313c25 7 54 6 76-6v20c-26 14-62 15-92 2 3-10 7-16 16-16z" fill="#0f3d5f"/>
+    <path d="M244 300c24 10 56 8 78-6 5 5 7 10 8 16-28 14-61 16-88 5 0-6 1-10 2-15z" fill="#67b7d1"/>
+    <path d="M262 292l38-10 18 15c-21 11-49 12-70 3 3-5 7-7 14-8z" fill="#eef7fa"/>
+
+    <path d="M399 270h26l12 24 12-24h26l-20 38v28h-36v-28z" fill="#3c91b3"/>
+    <path d="M399 270c8 12 17 19 38 20 21-1 30-8 38-20l-13-15c-7 9-15 14-25 14s-18-5-25-14z" fill="#79c5d6"/>
+
+    <path d="M512 296h80" stroke="#0f6d8f" stroke-width="8" stroke-linecap="round"/>
+    <path d="M584 276l28 20-28 20" fill="none" stroke="#0f6d8f" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <text x="652" y="218" fill="#0f6d8f" font-size="16" font-weight="800" letter-spacing="2">FEATURE MAPS</text>
+    <g transform="translate(632 246)">
+      <rect x="0" y="0" width="132" height="132" rx="18" fill="#eaf6f9" stroke="#cbdce5"/>
+      <rect x="24" y="24" width="84" height="84" rx="12" fill="url(#blue)" opacity=".16"/>
+      <path d="M26 82c20-32 44-28 61-9 14 15 19 3 23-18" fill="none" stroke="#0f6d8f" stroke-width="7" stroke-linecap="round"/>
+      <path d="M29 49c25 16 48 16 78-4" fill="none" stroke="#56b986" stroke-width="7" stroke-linecap="round"/>
+      <circle cx="68" cy="67" r="16" fill="#0f3d5f" opacity=".18"/>
+    </g>
+    <g transform="translate(686 274)">
+      <rect x="0" y="0" width="132" height="132" rx="18" fill="#f7fbfc" stroke="#cbdce5"/>
+      <rect x="24" y="24" width="84" height="84" rx="12" fill="url(#green)" opacity=".18"/>
+      <path d="M28 74c24-21 51-18 78 8" fill="none" stroke="#127159" stroke-width="7" stroke-linecap="round"/>
+      <path d="M38 46c18 15 41 17 70 2" fill="none" stroke="#0f6d8f" stroke-width="7" stroke-linecap="round"/>
+      <circle cx="72" cy="74" r="18" fill="#127159" opacity=".18"/>
+    </g>
+    <g transform="translate(740 302)">
+      <rect x="0" y="0" width="132" height="132" rx="18" fill="#fff" stroke="#cbdce5"/>
+      <rect x="24" y="24" width="84" height="84" rx="12" fill="#e7f5ef"/>
+      <path d="M28 78c18-30 42-26 56-10 13 15 23 13 30-3" fill="none" stroke="#0f6d8f" stroke-width="7" stroke-linecap="round"/>
+      <path d="M36 48c15 19 40 27 75 18" fill="none" stroke="#56b986" stroke-width="7" stroke-linecap="round"/>
+      <circle cx="64" cy="70" r="19" fill="#0f6d8f" opacity=".17"/>
+    </g>
+
+    <path d="M908 356h80" stroke="#0f6d8f" stroke-width="8" stroke-linecap="round"/>
+    <path d="M980 336l28 20-28 20" fill="none" stroke="#0f6d8f" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <text x="992" y="218" fill="#0f6d8f" font-size="16" font-weight="800" letter-spacing="2">SOFTMAX</text>
+    <rect x="948" y="246" width="168" height="230" rx="22" fill="#f7fbfc" stroke="#cbdce5"/>
+    <g font-size="18" font-weight="700">
+      <text x="980" y="294" fill="#0f1f2e">Flower</text>
+      <rect x="980" y="308" width="102" height="14" rx="7" fill="#dbe7ee"/>
+      <rect x="980" y="308" width="88" height="14" rx="7" fill="#56b986"/>
+      <text x="1088" y="323" fill="#127159" text-anchor="end">86%</text>
+
+      <text x="980" y="358" fill="#526574">Shoe</text>
+      <rect x="980" y="372" width="102" height="14" rx="7" fill="#dbe7ee"/>
+      <rect x="980" y="372" width="28" height="14" rx="7" fill="#0f6d8f"/>
+      <text x="1088" y="387" fill="#526574" text-anchor="end">9%</text>
+
+      <text x="980" y="422" fill="#526574">Shirt</text>
+      <rect x="980" y="436" width="102" height="14" rx="7" fill="#dbe7ee"/>
+      <rect x="980" y="436" width="14" height="14" rx="7" fill="#0f6d8f"/>
+      <text x="1088" y="451" fill="#526574" text-anchor="end">5%</text>
+    </g>
+  </g>
+
+  <g font-family="Inter, Segoe UI, Arial, sans-serif">
+    <rect x="92" y="546" width="270" height="92" rx="18" fill="#f7fbfc" stroke="#cbdce5"/>
+    <text x="120" y="584" fill="#0f1f2e" font-size="20" font-weight="800">Training pipeline</text>
+    <text x="120" y="616" fill="#526574" font-size="18">Augmentation + transfer learning</text>
+
+    <rect x="404" y="546" width="270" height="92" rx="18" fill="#f7fbfc" stroke="#cbdce5"/>
+    <text x="432" y="584" fill="#0f1f2e" font-size="20" font-weight="800">Experiment tracking</text>
+    <text x="432" y="616" fill="#526574" font-size="18">Compare architectures and data size</text>
+
+    <rect x="716" y="546" width="400" height="92" rx="18" fill="#edf8f2" stroke="#b7dbc8"/>
+    <text x="744" y="584" fill="#0f1f2e" font-size="20" font-weight="800">Best documented result</text>
+    <text x="744" y="616" fill="#127159" font-size="24" font-weight="900">0.8542 test accuracy</text>
+  </g>
+</svg>

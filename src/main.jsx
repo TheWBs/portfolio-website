@@ -88,8 +88,8 @@ const projects = [
     name: 'CNN Image Classification',
     type: 'Reproducible machine learning experiments',
     repo: 'https://github.com/TheWBs/cnn-image-classification',
-    image: asset('assets/projects/cnn/custom-model-layer-flow.png'),
-    imageAlt: 'Custom CNN model layer flow diagram from image classification project',
+    image: asset('assets/projects/cnn/classification-workflow.svg'),
+    imageAlt: 'CNN image classification workflow with input images, feature maps, and class probabilities',
     problem:
       'Compare image-classification approaches and understand the impact of architecture choice, transfer learning, and dataset size.',
     built:
@@ -225,13 +225,12 @@ function SectionHeading({ eyebrow, title, children }) {
 function About() {
   return (
     <section className="section split" id="about">
-      <SectionHeading eyebrow="About" title="Practical analytics work, built from the data model up.">
+      <SectionHeading eyebrow="About" title="Practical analytics work, built from the data model up." />
+      <div className="body-copy">
         <p>
           I am a Data Science and Engineering student at Kaunas University of Technology with hands-on
           experience in data engineering, business intelligence, and analytics.
         </p>
-      </SectionHeading>
-      <div className="body-copy">
         <p>
           During my Data Analyst internship at Prodivi, I worked with SQL, Power BI, DAX, data models,
           reporting logic, ETL logic, Microsoft Fabric, and Power BI Service workflows. I helped analyze
@@ -433,10 +432,12 @@ function Education() {
             <LogoBadge src={logos.ktu} alt="KTU logo" />
             <h3>Kaunas University of Technology</h3>
           </div>
-          <p>Bachelor of Applied Science, Data Science and Engineering</p>
+          <p className="degree">
+            Bachelor of Applied Science, <strong>Data Science and Engineering</strong>
+          </p>
           <p>2023 - to date</p>
           <p>
-            Coursework focused on data engineering, databases, statistical analysis, and machine learning.
+            Coursework focused on data engineering, data analytics, databases, statistical analysis, and machine learning.
           </p>
         </article>
         <article>
