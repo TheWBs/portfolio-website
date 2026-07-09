@@ -230,18 +230,9 @@ footer a:hover {
 
 .profile-card img {
   width: 100%;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
-  object-position: center 24%;
-}
-
-.profile-card figcaption {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 14px;
-  padding: 16px 18px;
-  border-top: 1px solid var(--line);
+  height: auto;
+  object-fit: contain;
+  background: var(--paper);
 }
 
 .hero-side .panel-topline {
@@ -262,20 +253,9 @@ footer a:hover {
   height: 12px;
 }
 
-.profile-card span {
-  color: var(--text);
-  font-weight: 900;
-}
-
-.profile-card strong {
-  color: var(--accent-dark);
-  font-size: 0.88rem;
-  text-align: right;
-}
-
 .panel-topline {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   gap: 18px;
   padding: 22px;
   border-bottom: 1px solid var(--line);
@@ -870,11 +850,6 @@ footer a {
   .hero-actions,
   .button {
     width: 100%;
-  }
-
-  .profile-card figcaption {
-    align-items: flex-start;
-    flex-direction: column;
   }
 
   .focus-grid,
