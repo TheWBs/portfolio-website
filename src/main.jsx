@@ -18,6 +18,8 @@ const logos = {
   kasp: asset('assets/logos/kasp-logo.svg'),
 };
 
+const profilePhoto = asset('assets/profile/profile.png');
+
 const skills = [
   {
     group: 'SQL & Data Modeling',
@@ -191,21 +193,30 @@ function Hero() {
           {emailStatus === 'Email copied' ? `${contact.email} copied to clipboard` : ''}
         </p>
       </div>
-      <div className="hero-panel recruiter-pipeline" aria-label="Recruiter review pipeline">
-        <div className="panel-topline">
-          <span>Recruiter Pipeline</span>
-          <strong>Healthy bit of optimism</strong>
-        </div>
-        <div className="pipeline-card">
-          {['Open page', 'Be amazed', 'Hire me'].map((step, index) => (
-            <Fragment key={step}>
-              <div className={index === 2 ? 'pipeline-step final-step' : 'pipeline-step'}>
-                <span>{String(index + 1).padStart(2, '0')}</span>
-                <strong>{step}</strong>
-              </div>
-              {index < 2 ? <i aria-hidden="true" /> : null}
-            </Fragment>
-          ))}
+      <div className="hero-side">
+        <figure className="profile-card">
+          <img src={profilePhoto} alt="Jokūbas Griežė profile portrait" loading="eager" />
+          <figcaption>
+            <span>Jokūbas Griežė</span>
+            <strong>Data Science & Engineering</strong>
+          </figcaption>
+        </figure>
+        <div className="hero-panel recruiter-pipeline" aria-label="Recruiter review pipeline">
+          <div className="panel-topline">
+            <span>Recruiter Pipeline</span>
+            <strong>Healthy bit of optimism</strong>
+          </div>
+          <div className="pipeline-card">
+            {['Open page', 'Be amazed', 'Hire me'].map((step, index) => (
+              <Fragment key={step}>
+                <div className={index === 2 ? 'pipeline-step final-step' : 'pipeline-step'}>
+                  <span>{String(index + 1).padStart(2, '0')}</span>
+                  <strong>{step}</strong>
+                </div>
+                {index < 2 ? <i aria-hidden="true" /> : null}
+              </Fragment>
+            ))}
+          </div>
         </div>
       </div>
     </section>
@@ -225,7 +236,7 @@ function SectionHeading({ eyebrow, title, children }) {
 function About() {
   return (
     <section className="section split" id="about">
-      <SectionHeading eyebrow="About" title="Practical analytics work, built from the data model up." />
+      <SectionHeading eyebrow="About" title="Summary about me." />
       <div className="body-copy">
         <p>
           I am a Data Science and Engineering student at Kaunas University of Technology with hands-on

@@ -214,6 +214,65 @@ footer a:hover {
   overflow: hidden;
 }
 
+.hero-side {
+  display: grid;
+  gap: 18px;
+}
+
+.profile-card {
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--paper);
+  box-shadow: var(--shadow);
+}
+
+.profile-card img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  object-position: center 24%;
+}
+
+.profile-card figcaption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 16px 18px;
+  border-top: 1px solid var(--line);
+}
+
+.hero-side .panel-topline {
+  padding: 16px 18px;
+}
+
+.hero-side .pipeline-card {
+  gap: 8px;
+  padding: 16px 18px;
+}
+
+.hero-side .pipeline-step {
+  min-height: 54px;
+  padding: 10px 12px;
+}
+
+.hero-side .pipeline-card i {
+  height: 12px;
+}
+
+.profile-card span {
+  color: var(--text);
+  font-weight: 900;
+}
+
+.profile-card strong {
+  color: var(--accent-dark);
+  font-size: 0.88rem;
+  text-align: right;
+}
+
 .panel-topline {
   display: flex;
   justify-content: space-between;
@@ -758,6 +817,10 @@ footer a {
   .project-media {
     min-height: 280px;
   }
+
+  .hero-side {
+    max-width: 520px;
+  }
 }
 
 @media (max-width: 720px) {
@@ -807,6 +870,11 @@ footer a {
   .hero-actions,
   .button {
     width: 100%;
+  }
+
+  .profile-card figcaption {
+    align-items: flex-start;
+    flex-direction: column;
   }
 
   .focus-grid,
