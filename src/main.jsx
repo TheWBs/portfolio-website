@@ -431,7 +431,7 @@ function Education() {
             Coursework focused on data engineering, data analytics, databases, statistical analysis, and machine learning.
           </p>
         </article>
-        <article>
+        <article className="language-card">
           <h3>Languages</h3>
           <p>Lithuanian - native</p>
           <p>English - fluent</p>
