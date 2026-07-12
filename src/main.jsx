@@ -20,26 +20,67 @@ const logos = {
 
 const profilePhoto = asset('assets/profile/profile.png');
 
-const skills = [
+const hardSkills = [
   {
-    group: 'SQL & Data Modeling',
-    items: ['SQL', 'Star schema', 'Data modeling', 'SQL Server', 'PostgreSQL', 'MySQL', 'MariaDB'],
+    group: 'Languages',
+    items: ['Python', 'SQL', 'DAX'],
   },
   {
-    group: 'BI & Visualization',
-    items: ['Power BI', 'DAX', 'Power Query', 'Power BI Service', 'Excel', 'KPI reporting'],
+    group: 'Data Engineering',
+    items: ['Kafka', 'Spark', 'Airflow', 'ETL/ELT pipelines', 'Data modeling'],
   },
   {
-    group: 'Data Engineering / Cloud',
-    items: ['ETL/ELT pipelines', 'Microsoft Fabric', 'Dataflows', 'Kafka', 'Spark', 'Airflow', 'BigQuery', 'Docker'],
+    group: 'Business Intelligence',
+    items: ['Power BI', 'DAX', 'Power Query', 'Power BI Service', 'Excel'],
   },
   {
-    group: 'Programming',
-    items: ['Python', 'pandas', 'PySpark', 'Scrapy', 'PyMySQL', 'Git', 'GitHub'],
+    group: 'Databases',
+    items: ['SQL Server', 'PostgreSQL', 'MySQL', 'MariaDB'],
   },
   {
-    group: 'Business & Consulting',
-    items: ['Requirements clarification', 'Report logic', 'Business rules', 'Client communication', 'Analytical thinking'],
+    group: 'Cloud & Infrastructure',
+    items: ['Google Cloud (BigQuery)', 'Microsoft Power Platform', 'Microsoft Fabric', 'Dataflows', 'Docker', 'Docker Compose'],
+  },
+  {
+    group: 'Data Processing',
+    items: ['pandas', 'PySpark', 'Power Query'],
+  },
+  {
+    group: 'Version Control',
+    items: ['Git', 'GitHub'],
+  },
+];
+
+const softSkills = [
+  {
+    name: 'Analytical thinking',
+    evidence:
+      'At Prodivi, I analyzed database structures, model relationships, and calculation logic to support reliable reporting.',
+  },
+  {
+    name: 'Communication',
+    evidence:
+      'I clarified reporting requirements with clients at Prodivi and adapt difficult explanations to each student as a math tutor.',
+  },
+  {
+    name: 'Problem-solving',
+    evidence:
+      'In my portfolio projects, I turn raw datasets and live event streams into structured pipelines, models, dashboards, and searchable outputs.',
+  },
+  {
+    name: 'Curiosity and learning',
+    evidence:
+      'Jolita Vekteriene’s recommendation notes that I asked thoughtful questions and actively explored both analytics and data engineering concepts.',
+  },
+  {
+    name: 'Teamwork and responsibility',
+    evidence:
+      'Serving in KASP requires working as part of a unit, taking responsibility for assigned duties, and supporting the team during training.',
+  },
+  {
+    name: 'Discipline and resilience',
+    evidence:
+      'I continue to develop both through military training and service as a volunteer soldier in KASP.',
   },
 ];
 
@@ -104,7 +145,7 @@ const projects = [
 
 const navItems = [
   ['About', '#about'],
-  ['Skills', '#skills'],
+  ['Hard skills', '#skills'],
   ['Experience', '#experience'],
   ['Education', '#education'],
   ['Projects', '#projects'],
@@ -240,9 +281,9 @@ function About() {
 function Skills() {
   return (
     <section className="section" id="skills">
-      <SectionHeading eyebrow="Skills" title="Tools I use to build useful data products." />
+      <SectionHeading eyebrow="Skills" title="Hard skills." />
       <div className="skill-grid">
-        {skills.map((group) => (
+        {hardSkills.map((group) => (
           <article className="skill-card" key={group.group}>
             <h3>{group.group}</h3>
             <ul>
@@ -252,6 +293,21 @@ function Skills() {
             </ul>
           </article>
         ))}
+      </div>
+      <div className="soft-skills">
+        <div className="soft-skills-heading">
+          <p>Applied strengths</p>
+          <h3>Soft skills.</h3>
+        </div>
+        <ol className="soft-skill-list">
+          {softSkills.map((skill, index) => (
+            <li key={skill.name}>
+              <span className="soft-skill-index">{String(index + 1).padStart(2, '0')}</span>
+              <strong>{skill.name}</strong>
+              <p>{skill.evidence}</p>
+            </li>
+          ))}
+        </ol>
       </div>
     </section>
   );

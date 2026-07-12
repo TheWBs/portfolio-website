@@ -372,24 +372,25 @@ footer a:hover {
 
 .skill-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 0;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
   margin-top: 32px;
+  border: 1px solid var(--text);
   border-top: 1px solid var(--text);
   border-bottom: 1px solid var(--text);
+  background: var(--line);
 }
 
 .skill-card,
 .education-grid article {
   border: 0;
-  border-right: 1px solid var(--line);
   border-radius: 0;
   background: rgba(255, 255, 255, 0.66);
   padding: 22px;
 }
 
-.skill-card:last-child {
-  border-right: 0;
+.skill-card:nth-child(5) {
+  grid-column: span 2;
 }
 
 .skill-card h3,
@@ -420,6 +421,65 @@ footer a:hover {
   color: var(--muted);
   font-size: 0.96rem;
   line-height: 1.35;
+}
+
+.soft-skills {
+  display: grid;
+  grid-template-columns: minmax(190px, 0.34fr) 1fr;
+  gap: 42px;
+  margin-top: 64px;
+}
+
+.soft-skills-heading p {
+  margin: 0 0 10px;
+  color: var(--accent);
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.soft-skills-heading h3 {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2rem, 3vw, 2.7rem);
+  line-height: 1;
+  letter-spacing: -0.025em;
+}
+
+.soft-skill-list {
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--text);
+  list-style: none;
+}
+
+.soft-skill-list li {
+  display: grid;
+  grid-template-columns: 42px minmax(160px, 0.38fr) 1fr;
+  gap: 18px;
+  align-items: baseline;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.soft-skill-index {
+  color: var(--accent);
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  font-size: 0.76rem;
+  font-weight: 800;
+}
+
+.soft-skill-list strong {
+  color: var(--text);
+  font-size: 1rem;
+}
+
+.soft-skill-list p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.6;
 }
 
 .projects-section {
@@ -811,6 +871,11 @@ footer a {
     grid-template-columns: repeat(2, 1fr);
   }
 
+  .soft-skills {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
   .project-media {
     min-height: 280px;
     border-right: 0;
@@ -888,12 +953,20 @@ footer a {
 
   .skill-card,
   .skill-card:last-child {
-    border-right: 0;
-    border-bottom: 1px solid var(--line);
+    border: 0;
   }
 
-  .skill-card:last-child {
-    border-bottom: 0;
+  .skill-card:nth-child(5) {
+    grid-column: span 1;
+  }
+
+  .soft-skill-list li {
+    grid-template-columns: 34px 1fr;
+    gap: 8px 14px;
+  }
+
+  .soft-skill-list p {
+    grid-column: 2;
   }
 
   .language-card {
