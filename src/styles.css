@@ -372,25 +372,33 @@ footer a:hover {
 
 .skill-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1px;
+  grid-template-columns: 1fr;
+  gap: 0;
   margin-top: 32px;
-  border: 1px solid var(--text);
   border-top: 1px solid var(--text);
   border-bottom: 1px solid var(--text);
-  background: var(--line);
+  background: transparent;
 }
 
 .skill-card,
 .education-grid article {
   border: 0;
   border-radius: 0;
-  background: rgba(255, 255, 255, 0.66);
+  background: transparent;
   padding: 22px;
 }
 
-.skill-card:nth-child(5) {
-  grid-column: span 2;
+.skill-card {
+  display: grid;
+  grid-template-columns: minmax(210px, 0.32fr) 1fr;
+  gap: 28px;
+  align-items: start;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.skill-card:last-child {
+  border-bottom: 0;
 }
 
 .skill-card h3,
@@ -403,7 +411,7 @@ footer a:hover {
 }
 
 .skill-card h3 {
-  min-height: 2.5em;
+  min-height: 0;
   font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
   font-size: 1.02rem;
 }
@@ -411,16 +419,24 @@ footer a:hover {
 .skill-card ul,
 .timeline-item ul {
   padding: 0;
-  margin: 18px 0 0;
+  margin: 0;
   list-style: none;
 }
 
+.skill-card ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
 .skill-card li {
-  padding: 10px 0;
-  border-top: 1px solid var(--soft);
-  color: var(--muted);
-  font-size: 0.96rem;
-  line-height: 1.35;
+  padding: 7px 11px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.72);
+  color: var(--text);
+  font-size: 0.88rem;
+  line-height: 1.2;
 }
 
 .soft-skills {
@@ -868,7 +884,7 @@ footer a {
   }
 
   .skill-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr;
   }
 
   .soft-skills {
@@ -953,11 +969,13 @@ footer a {
 
   .skill-card,
   .skill-card:last-child {
-    border: 0;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    border-bottom: 1px solid var(--line);
   }
 
-  .skill-card:nth-child(5) {
-    grid-column: span 1;
+  .skill-card:last-child {
+    border-bottom: 0;
   }
 
   .soft-skill-list li {

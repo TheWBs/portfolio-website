@@ -23,7 +23,7 @@ const profilePhoto = asset('assets/profile/profile.png');
 const hardSkills = [
   {
     group: 'Languages',
-    items: ['Python', 'SQL', 'DAX'],
+    items: ['Python', 'SQL', 'DAX', 'C++', 'C#'],
   },
   {
     group: 'Data Engineering',
@@ -145,10 +145,10 @@ const projects = [
 
 const navItems = [
   ['About', '#about'],
-  ['Hard skills', '#skills'],
   ['Experience', '#experience'],
-  ['Education', '#education'],
   ['Projects', '#projects'],
+  ['Skills', '#skills'],
+  ['Education', '#education'],
   ['Recommendation', '#recommendation'],
   ['Contact', '#contact'],
 ];
@@ -538,10 +538,10 @@ function App() {
       <main>
         <Hero />
         <About />
-        <Skills />
         <Experience />
-        <Education />
         <Projects />
+        <Skills />
+        <Education />
         <Recommendation />
         <Contact />
       </main>
