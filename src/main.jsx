@@ -278,9 +278,9 @@ function ProjectVisual({ project }) {
 function Projects() {
   return (
     <section className="section projects-section" id="projects">
-      <SectionHeading eyebrow="Projects" title="Selected data and analytics projects.">
+      <SectionHeading eyebrow="Projects" title="Selected data engineering and analytics projects.">
         <p>
-          A mix of BI reporting, streaming pipelines, semantic search, and reproducible machine learning work.
+          Projects that show how I turn raw data into reliable pipelines, models, dashboards, and analysis.
         </p>
       </SectionHeading>
       <div className="project-list">

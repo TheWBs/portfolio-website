@@ -173,7 +173,7 @@ footer a:hover {
   font-size: clamp(3.4rem, 6.6vw, 6rem);
   font-weight: 700;
   line-height: 0.95;
-  letter-spacing: -0.045em;
+  letter-spacing: -0.025em;
 }
 
 .role {
@@ -277,19 +277,6 @@ footer a:hover {
   left: 12px;
   border: 1px solid var(--accent);
   content: "";
-}
-
-.profile-card::after {
-  position: absolute;
-  right: -1px;
-  bottom: -1px;
-  padding: 7px 9px;
-  background: var(--text);
-  color: white;
-  content: "PROFILE_01";
-  font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
-  font-size: 0.68rem;
-  letter-spacing: 0.08em;
 }
 
 .profile-card img {
@@ -583,21 +570,9 @@ dd {
 }
 
 .timeline-item {
-  position: relative;
   border-top: 1px solid var(--line);
   border-left: 0;
-  padding: 22px 0 6px 30px;
-}
-
-.timeline-item::before {
-  position: absolute;
-  top: 27px;
-  left: 0;
-  width: 10px;
-  height: 10px;
-  border: 2px solid var(--accent);
-  background: var(--bg);
-  content: "";
+  padding: 22px 0 6px;
 }
 
 .timeline-heading,
