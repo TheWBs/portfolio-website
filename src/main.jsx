@@ -1,5 +1,8 @@
-import { Fragment, useState } from 'react';
+import { useState } from 'react';
 import { createRoot } from 'react-dom/client';
+import { ArrowUpRight } from '@phosphor-icons/react';
+import '@fontsource-variable/newsreader';
+import '@fontsource-variable/jetbrains-mono';
 import './styles.css';
 
 const asset = (path) => `${import.meta.env.BASE_URL}${path}`;
@@ -117,8 +120,8 @@ const projects = [
     name: 'News Ingestion & Semantic Search Pipeline',
     type: 'ETL and semantic retrieval pipeline',
     repo: 'https://github.com/TheWBs/news-ingestion-search-pipeline',
-    image: null,
-    imageAlt: '',
+    image: asset('assets/projects/news-pipeline-cover.png'),
+    imageAlt: 'Editorial visualization of a news ingestion and semantic search data pipeline',
     problem:
       'Design a production-style workflow for crawling, processing, embedding, storing, and searching news articles.',
     built:
@@ -153,9 +156,14 @@ const navItems = [
   ['Contact', '#contact'],
 ];
 
-function copyToClipboard(text) {
+async function copyToClipboard(text) {
   if (navigator.clipboard?.writeText) {
-    return navigator.clipboard.writeText(text);
+    try {
+      await navigator.clipboard.writeText(text);
+      return;
+    } catch {
+      // Fall through for browsers that expose Clipboard API but block access.
+    }
   }
 
   const field = document.createElement('textarea');
@@ -165,18 +173,15 @@ function copyToClipboard(text) {
   field.style.opacity = '0';
   document.body.appendChild(field);
   field.select();
-  document.execCommand('copy');
+  const copied = document.execCommand('copy');
   document.body.removeChild(field);
-  return Promise.resolve();
+  if (!copied) {
+    throw new Error('Unable to copy email address');
+  }
 }
 
 function ArrowIcon() {
-  return (
-    <svg aria-hidden="true" viewBox="0 0 24 24" className="icon">
-      <path d="M5 12h13" />
-      <path d="m13 6 6 6-6 6" />
-    </svg>
-  );
+  return <ArrowUpRight aria-hidden="true" className="icon" weight="bold" />;
 }
 
 function Header() {
@@ -205,7 +210,7 @@ function Hero() {
   const handleEmailCopy = async () => {
     await copyToClipboard(contact.email);
     setEmailStatus('Email copied');
-    window.setTimeout(() => setEmailStatus('Copy email'), 2200);
+    window.setTimeout(() => setEmailStatus('Copy email'), 5000);
   };
 
   return (
@@ -300,9 +305,8 @@ function Skills() {
           <h3>Soft skills.</h3>
         </div>
         <ol className="soft-skill-list">
-          {softSkills.map((skill, index) => (
+          {softSkills.map((skill) => (
             <li key={skill.name}>
-              <span className="soft-skill-index">{String(index + 1).padStart(2, '0')}</span>
               <strong>{skill.name}</strong>
               <p>{skill.evidence}</p>
             </li>
@@ -314,20 +318,6 @@ function Skills() {
 }
 
 function ProjectVisual({ project }) {
-  if (!project.image) {
-    // No screenshot available in the source repository; this code-native pipeline visual keeps the card useful without adding a visible disclaimer.
-    return (
-      <div className="pipeline-visual" aria-label="Pipeline flow visualization">
-        {['Crawl', 'Store', 'Clean', 'Embed', 'Search'].map((step, index) => (
-          <Fragment key={step}>
-            <span>{step}</span>
-            {index < 4 ? <i aria-hidden="true" /> : null}
-          </Fragment>
-        ))}
-      </div>
-    );
-  }
-
   return <img src={project.image} alt={project.imageAlt} loading="eager" />;
 }
 
@@ -503,7 +493,7 @@ function Contact() {
   const handleEmailCopy = async () => {
     await copyToClipboard(contact.email);
     setEmailStatus('Email copied');
-    window.setTimeout(() => setEmailStatus('Copy email'), 2200);
+    window.setTimeout(() => setEmailStatus('Copy email'), 5000);
   };
 
   return (
