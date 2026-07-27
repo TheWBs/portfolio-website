@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { Fragment, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { ArrowUpRight } from '@phosphor-icons/react';
 import '@fontsource-variable/newsreader';
@@ -42,7 +42,16 @@ const hardSkills = [
   },
   {
     group: 'Cloud & Infrastructure',
-    items: ['Google Cloud (BigQuery)', 'Microsoft Power Platform', 'Microsoft Fabric', 'Dataflows', 'Docker', 'Docker Compose'],
+    items: [
+      'Google Cloud (BigQuery)',
+      'Microsoft Power Platform',
+      'Microsoft Fabric',
+      'Dataflows',
+      'Cloudflare Pages',
+      'Cloudflare DNS',
+      'Docker',
+      'Docker Compose',
+    ],
   },
   {
     group: 'Data Processing',
@@ -120,8 +129,8 @@ const projects = [
     name: 'News Ingestion & Semantic Search Pipeline',
     type: 'ETL and semantic retrieval pipeline',
     repo: 'https://github.com/TheWBs/news-ingestion-search-pipeline',
-    image: asset('assets/projects/news-pipeline-cover.png'),
-    imageAlt: 'Editorial visualization of a news ingestion and semantic search data pipeline',
+    image: null,
+    imageAlt: '',
     problem:
       'Design a production-style workflow for crawling, processing, embedding, storing, and searching news articles.',
     built:
@@ -224,7 +233,7 @@ function Hero() {
         </p>
         <div className="hero-actions" aria-label="Primary contact links">
           <a className="button primary" href={contact.cv} target="_blank" rel="noreferrer">
-            Download CV <ArrowIcon />
+            Open CV <ArrowIcon />
           </a>
           <a className="button secondary" href={contact.linkedin} target="_blank" rel="noreferrer">
             LinkedIn
@@ -318,6 +327,19 @@ function Skills() {
 }
 
 function ProjectVisual({ project }) {
+  if (!project.image) {
+    return (
+      <div className="pipeline-visual" aria-label="Pipeline flow visualization">
+        {['Crawl', 'Store', 'Clean', 'Embed', 'Search'].map((step, index) => (
+          <Fragment key={step}>
+            <span>{step}</span>
+            {index < 4 ? <i aria-hidden="true" /> : null}
+          </Fragment>
+        ))}
+      </div>
+    );
+  }
+
   return <img src={project.image} alt={project.imageAlt} loading="eager" />;
 }
 

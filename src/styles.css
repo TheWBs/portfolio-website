@@ -357,7 +357,14 @@ footer a:hover {
 }
 
 #experience {
+  align-items: start;
   padding-top: 84px;
+}
+
+#experience .section-heading {
+  position: sticky;
+  top: 106px;
+  margin-bottom: 0;
 }
 
 .timeline {
@@ -530,6 +537,37 @@ footer a:hover {
 
 .project-card:nth-child(3) .project-media img {
   object-fit: cover;
+}
+
+.pipeline-visual {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+  padding: 28px;
+}
+
+.pipeline-visual span {
+  display: inline-grid;
+  min-width: 92px;
+  min-height: 62px;
+  place-items: center;
+  border: 1px solid rgba(36, 18, 8, 0.32);
+  border-radius: var(--radius);
+  background: var(--page);
+  color: var(--text);
+  font-family: "JetBrains Mono Variable", "JetBrains Mono", monospace;
+  font-size: 0.76rem;
+  font-weight: 700;
+  box-shadow: 0 14px 30px rgba(36, 18, 8, 0.16);
+}
+
+.pipeline-visual i {
+  width: 28px;
+  height: 2px;
+  background: var(--page);
 }
 
 .project-content {
@@ -721,8 +759,8 @@ dd {
 
 .recommendation-section {
   display: grid;
-  grid-template-columns: minmax(240px, 0.58fr) minmax(0, 1.42fr);
-  gap: clamp(40px, 7vw, 96px);
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(34px, 4vw, 54px);
   width: min(var(--content), calc(100% - 48px));
   margin-block: 44px;
   border-radius: var(--radius);
@@ -732,6 +770,7 @@ dd {
 }
 
 .recommendation-section .section-heading {
+  max-width: none;
   margin: 0;
 }
 
@@ -740,8 +779,19 @@ dd {
   color: var(--page);
 }
 
+.recommendation-section .section-heading h2 {
+  max-width: none;
+  font-size: clamp(3rem, 5vw, 5rem);
+}
+
 .quote-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(250px, 0.34fr);
+  gap: clamp(34px, 5vw, 70px);
+  align-items: end;
   margin: 0;
+  padding-top: 32px;
+  border-top: 1px solid rgba(36, 18, 8, 0.25);
 }
 
 .quote-card blockquote {
@@ -757,11 +807,11 @@ dd {
 
 .quote-card figcaption {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 14px;
-  margin-top: 26px;
-  padding-top: 20px;
-  border-top: 1px solid rgba(36, 18, 8, 0.25);
+  margin: 0;
+  padding-left: 28px;
+  border-left: 1px solid rgba(36, 18, 8, 0.25);
 }
 
 .quote-card figcaption div {
@@ -923,6 +973,17 @@ footer a {
   .recommendation-section {
     grid-template-columns: minmax(0, 1fr);
   }
+
+  .quote-card {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .quote-card figcaption {
+    padding-top: 20px;
+    padding-left: 0;
+    border-top: 1px solid rgba(36, 18, 8, 0.25);
+    border-left: 0;
+  }
 }
 
 @media (max-width: 820px) {
@@ -951,7 +1012,8 @@ footer a {
     justify-self: start;
   }
 
-  #about .section-heading {
+  #about .section-heading,
+  #experience .section-heading {
     position: static;
   }
 
@@ -1093,6 +1155,16 @@ footer a {
 
   .project-content {
     padding: 22px;
+  }
+
+  .pipeline-visual {
+    flex-direction: column;
+    padding: 18px;
+  }
+
+  .pipeline-visual i {
+    width: 2px;
+    height: 18px;
   }
 
   dl div {
