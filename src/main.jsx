@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { ArrowUpRight } from '@phosphor-icons/react';
 import '@fontsource-variable/newsreader';
@@ -25,41 +25,58 @@ const profilePhoto = asset('assets/profile/profile.png');
 
 const hardSkills = [
   {
-    group: 'Languages',
-    items: ['Python', 'SQL', 'DAX', 'C++', 'C#'],
+    group: 'Programming & Query',
+    items: ['Python', 'SQL'],
   },
   {
     group: 'Data Engineering',
-    items: ['Kafka', 'Spark', 'Airflow', 'ETL/ELT pipelines', 'Data modeling'],
+    items: ['Microsoft Fabric', 'Apache Kafka', 'Apache Spark', 'Apache Airflow', 'ETL/ELT pipelines', 'Data modeling'],
   },
   {
-    group: 'Business Intelligence',
+    group: 'Analytics & Business Intelligence',
     items: ['Power BI', 'DAX', 'Power Query', 'Power BI Service', 'Excel'],
   },
   {
-    group: 'Databases',
-    items: ['SQL Server', 'PostgreSQL', 'MySQL', 'MariaDB'],
-  },
-  {
-    group: 'Cloud & Infrastructure',
-    items: [
-      'Google Cloud (BigQuery)',
-      'Microsoft Power Platform',
-      'Microsoft Fabric',
-      'Dataflows',
-      'Cloudflare Pages',
-      'Cloudflare DNS',
-      'Docker',
-      'Docker Compose',
-    ],
+    group: 'Databases & Warehousing',
+    items: ['SQL Server', 'PostgreSQL', 'MySQL', 'MariaDB', 'Google BigQuery'],
   },
   {
     group: 'Data Processing',
-    items: ['pandas', 'PySpark', 'Power Query'],
+    items: ['pandas', 'PySpark'],
   },
   {
-    group: 'Version Control',
-    items: ['Git', 'GitHub'],
+    group: 'Infrastructure & Version Control',
+    items: ['Docker', 'Docker Compose', 'Git', 'GitHub'],
+  },
+];
+
+const certifications = [
+  {
+    issuer: 'Microsoft',
+    name: 'Microsoft Certified: Fabric Data Engineer Associate',
+    issued: 'August 2026',
+    identifier: 'DP-700',
+    description:
+      'Microsoft certification covering data ingestion, transformation, orchestration and monitoring in Microsoft Fabric.',
+    url: null,
+  },
+  {
+    issuer: 'Microsoft Applied Skills',
+    name: 'Implement a Real-Time Intelligence solution with Microsoft Fabric',
+    issued: 'August 2026',
+    identifier: null,
+    description:
+      'Hands-on credential focused on building and analyzing real-time data solutions in Microsoft Fabric.',
+    url: null,
+  },
+  {
+    issuer: 'Databricks',
+    name: 'Databricks Fundamentals Accreditation',
+    issued: 'July 2026',
+    identifier: null,
+    description:
+      'Foundational accreditation covering the Databricks Lakehouse Platform and core data concepts.',
+    url: null,
   },
 ];
 
@@ -98,22 +115,9 @@ const softSkills = [
 
 const projects = [
   {
-    name: 'NYC FHV Trips Power BI Dashboard',
-    type: 'Business intelligence dashboard',
-    repo: 'https://github.com/TheWBs/nyc-fhv-trips-power-bi-dashboard',
-    image: asset('assets/projects/nyc-fhv/zone-overview.png'),
-    imageAlt: 'Power BI zone overview dashboard for NYC for-hire vehicle trip analysis',
-    problem:
-      'Turn raw NYC high-volume for-hire vehicle trip records into a practical report for analyzing activity, fares, zones, and driver earnings.',
-    built:
-      'Built a Power BI report with a star-schema model, DAX measures, dynamic metric selection, KPI cards, trend views, company comparisons, map visuals, and role-level filtering for Uber/Lyft views.',
-    tools: ['Power BI', 'DAX', 'Power Query', 'Data modeling', 'Dataflow Gen-1'],
-    result:
-      'The repository documents three report pages, 25 DAX measures, company-specific views, and a reproducible PBIX workflow using public NYC TLC data.',
-  },
-  {
     name: 'AVAX Streaming Data Pipeline',
     type: 'Real-time data engineering pipeline',
+    emphasis: 'engineering',
     repo: 'https://github.com/TheWBs/avax-streaming-data-pipeline',
     image: asset('assets/projects/avax/architecture-diagram.svg'),
     imageAlt: 'Architecture diagram for AVAX streaming data pipeline',
@@ -128,6 +132,7 @@ const projects = [
   {
     name: 'News Ingestion & Semantic Search Pipeline',
     type: 'ETL and semantic retrieval pipeline',
+    emphasis: 'engineering',
     repo: 'https://github.com/TheWBs/news-ingestion-search-pipeline',
     image: null,
     imageAlt: '',
@@ -138,6 +143,21 @@ const projects = [
     tools: ['Python', 'Docker', 'Scrapy', 'MariaDB', 'PyMySQL', 'Vector embeddings'],
     result:
       'The README documents queue-driven ingestion, idempotent crawling, scalable batch processing, and use in AI-based software for misinformation detection and citation support.',
+  },
+  {
+    name: 'NYC FHV Trips Power BI Dashboard',
+    type: 'Business intelligence dashboard',
+    emphasis: 'analytics',
+    repo: 'https://github.com/TheWBs/nyc-fhv-trips-power-bi-dashboard',
+    image: asset('assets/projects/nyc-fhv/zone-overview.png'),
+    imageAlt: 'Power BI zone overview dashboard for NYC for-hire vehicle trip analysis',
+    problem:
+      'Turn raw NYC high-volume for-hire vehicle trip records into a practical report for analyzing activity, fares, zones, and driver earnings.',
+    built:
+      'Built a Power BI report with a star-schema model, DAX measures, dynamic metric selection, KPI cards, trend views, company comparisons, map visuals, and role-level filtering for Uber/Lyft views.',
+    tools: ['Power BI', 'DAX', 'Power Query', 'Data modeling', 'Dataflow Gen-1'],
+    result:
+      'The repository documents three report pages, 25 DAX measures, company-specific views, and a reproducible PBIX workflow using public NYC TLC data.',
   },
   {
     name: 'CNN Image Classification',
@@ -158,6 +178,7 @@ const projects = [
 const navItems = [
   ['About', '#about'],
   ['Experience', '#experience'],
+  ['Certifications', '#certifications'],
   ['Projects', '#projects'],
   ['Skills', '#skills'],
   ['Education', '#education'],
@@ -194,6 +215,38 @@ function ArrowIcon() {
 }
 
 function Header() {
+  const [activeSection, setActiveSection] = useState('top');
+
+  useEffect(() => {
+    const sections = ['about', 'experience', 'certifications', 'projects', 'skills', 'education', 'recommendation', 'contact']
+      .map((id) => document.getElementById(id))
+      .filter(Boolean);
+    const updateActiveSection = () => {
+      if (window.scrollY < window.innerHeight * 0.25) {
+        setActiveSection('top');
+        return;
+      }
+
+      const atPageEnd = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
+      if (atPageEnd) {
+        setActiveSection('contact');
+        return;
+      }
+
+      const scanLine = window.innerHeight * 0.35;
+      const currentSection = sections.filter((section) => section.getBoundingClientRect().top <= scanLine).at(-1);
+      if (currentSection) setActiveSection(currentSection.id);
+    };
+
+    updateActiveSection();
+    window.addEventListener('scroll', updateActiveSection, { passive: true });
+    window.addEventListener('resize', updateActiveSection);
+    return () => {
+      window.removeEventListener('scroll', updateActiveSection);
+      window.removeEventListener('resize', updateActiveSection);
+    };
+  }, []);
+
   return (
     <header className="site-header">
       <a className="brand" href="#top" aria-label="Jokūbas Griežė home">
@@ -201,12 +254,18 @@ function Header() {
       </a>
       <nav aria-label="Primary navigation">
         {navItems.map(([label, href]) => (
-          <a key={href} href={href}>
+          <a
+            key={href}
+            href={href}
+            onClick={() => setActiveSection(href.slice(1))}
+            className={activeSection === href.slice(1) ? 'active' : undefined}
+            aria-current={activeSection === href.slice(1) ? 'location' : undefined}
+          >
             {label}
           </a>
         ))}
       </nav>
-      <a className="header-link" href={contact.cv} target="_blank" rel="noreferrer">
+      <a className="header-link" href={contact.cv} target="_blank" rel="noopener noreferrer">
         Open CV
       </a>
     </header>
@@ -226,19 +285,24 @@ function Hero() {
     <section className="hero section" id="top">
       <div className="hero-copy">
         <h1>Jokūbas Griežė</h1>
-        <p className="role">Junior Data Engineer | Data Analyst</p>
+        <p className="role">Data Engineer | Data Analytics &amp; BI</p>
         <p className="hero-text">
-          I build practical analytics and data-engineering work: SQL models, Power BI reports, ETL logic,
-          Microsoft Fabric workflows, and data pipelines that make business data clearer and easier to use.
+          I build reliable data pipelines, data models and analytics solutions with Python, SQL, Microsoft
+          Fabric and Power BI, turning raw data into systems businesses can trust and use.
         </p>
+        <a className="hero-credential" href="#certifications">
+          <span>Microsoft Certified</span>
+          Fabric Data Engineer Associate (DP-700)
+          <ArrowIcon />
+        </a>
         <div className="hero-actions" aria-label="Primary contact links">
-          <a className="button primary" href={contact.cv} target="_blank" rel="noreferrer">
+          <a className="button primary" href={contact.cv} target="_blank" rel="noopener noreferrer">
             Open CV <ArrowIcon />
           </a>
-          <a className="button secondary" href={contact.linkedin} target="_blank" rel="noreferrer">
+          <a className="button secondary" href={contact.linkedin} target="_blank" rel="noopener noreferrer">
             LinkedIn
           </a>
-          <a className="button secondary" href={contact.github} target="_blank" rel="noreferrer">
+          <a className="button secondary" href={contact.github} target="_blank" rel="noopener noreferrer">
             GitHub
           </a>
           <button className="button secondary" type="button" onClick={handleEmailCopy}>
@@ -274,18 +338,14 @@ function About() {
       <SectionHeading eyebrow="About" title="Summary about me." />
       <div className="body-copy">
         <p>
-          I am a Data Science and Engineering student at Kaunas University of Technology with hands-on
-          experience in data engineering, business intelligence, and analytics.
+          Data Science and Engineering student at Kaunas University of Technology and Microsoft Certified
+          Fabric Data Engineer Associate (DP-700). Currently working as a Data Engineer in a stealth startup,
+          developing a synthetic data generation platform and its supporting data pipelines.
         </p>
         <p>
-          During my Data Analyst internship at Prodivi, I worked with SQL, Power BI, DAX, data models,
-          reporting logic, ETL logic, Microsoft Fabric, and Power BI Service workflows. I helped analyze
-          database structures, improve model relationships, validate calculations, and clarify reporting
-          requirements.
-        </p>
-        <p>
-          I am especially interested in analytics engineering, data warehousing, reliable reporting
-          systems, and practical use of LLMs in business and technical workflows.
+          I have hands-on experience with Python, SQL, Microsoft Fabric, Power BI, DAX, data modeling,
+          ETL/ELT and data warehousing. I focus on building reliable data systems while also turning data
+          into useful analytics and business insights.
         </p>
       </div>
     </section>
@@ -353,7 +413,7 @@ function Projects() {
       </SectionHeading>
       <div className="project-list">
         {projects.map((project) => (
-          <article className="project-card" key={project.name}>
+          <article className={`project-card project-card--${project.emphasis || 'additional'}`} key={project.name}>
             <div className="project-media">
               <ProjectVisual project={project} />
             </div>
@@ -379,7 +439,7 @@ function Projects() {
                   <span key={tool}>{tool}</span>
                 ))}
               </div>
-              <a className="text-link" href={project.repo} target="_blank" rel="noreferrer">
+              <a className="text-link" href={project.repo} target="_blank" rel="noopener noreferrer">
                 View repository <ArrowIcon />
               </a>
             </div>
@@ -394,50 +454,102 @@ function Experience() {
   return (
     <section className="section split" id="experience">
       <SectionHeading eyebrow="Experience" title="Relevant experience." />
-      <div className="timeline">
-        <article className="timeline-item">
+      <div className="experience-content">
+        <div className="technical-experience">
+          <article className="timeline-item timeline-item--featured">
+            <div className="timeline-heading">
+              <LogoBadge text="DE" alt="Data Engineering role" tone="dark" />
+              <div>
+                <h3>Data Engineer</h3>
+                <p>Stealth Startup · July 2026 – Present</p>
+              </div>
+            </div>
+            <ul>
+              <li>Developing a synthetic data platform that preserves dataset structure and statistical relationships.</li>
+              <li>Building data ingestion, profiling and transformation pipelines for structured data.</li>
+              <li>Designing schema inference and semantic column classification logic.</li>
+              <li>Implementing privacy safeguards and data quality validation for BI, AI and testing use cases.</li>
+            </ul>
+          </article>
+          <article className="timeline-item timeline-item--technical">
           <div className="timeline-heading">
             <LogoBadge src={logos.prodivi} alt="PRODIVI logo" tone="dark" />
             <div>
-              <h3>Intern Data Analyst</h3>
-              <p>PRODIVI, UAB · May 2026 - July 2026 · Kaunas, Lithuania</p>
+                <h3>Data Analyst Intern</h3>
+                <p>PRODIVI, UAB · May 2026 – July 2026 · Kaunas, Lithuania</p>
             </div>
           </div>
           <ul>
-            <li>Worked on SQL and Power BI-based business intelligence solutions for client reporting projects.</li>
-            <li>Designed database structures with ETL logic and improved database, DWH, data model, and relationship structures.</li>
-            <li>Created DAX measures, validated calculation logic, and supported Power BI report model improvements.</li>
-            <li>Communicated with clients to clarify reporting requirements and data-related questions.</li>
+              <li>Worked on SQL and Power BI business intelligence solutions for client projects.</li>
+              <li>Designed and improved database and DWH structures, data models and ETL logic.</li>
+              <li>Built and validated DAX measures, relationships and reporting logic.</li>
+              <li>Worked with clients to clarify reporting requirements and data definitions.</li>
           </ul>
         </article>
-        <article className="timeline-item">
+        </div>
+        <div className="additional-experience">
+          <div className="additional-experience-heading">
+            <p>Additional Experience</p>
+          </div>
+          <article className="additional-experience-item">
           <div className="timeline-heading">
             <LogoBadge src={logos.kasp} alt="KASP logo" />
             <div>
               <h3>Infantry Soldier</h3>
-              <p>KASP · Jun 2025 - Present · Lithuanian National Defence Volunteer Forces</p>
+                <p>KASP · June 2025 – Present · Lithuanian National Defence Volunteer Forces</p>
             </div>
           </div>
           <p>
-            Volunteer Soldier — Lithuanian National Defence Volunteer Forces (KASP). Serving as a volunteer in
-            the Lithuanian National Defence Volunteer Forces, developing discipline, teamwork, responsibility
-            and resilience through military training and service.
+              Volunteer service developing teamwork, discipline, responsibility and resilience through military
+              training and service.
           </p>
         </article>
-        <article className="timeline-item">
+          <article className="additional-experience-item">
           <div className="timeline-heading">
             <LogoBadge text="π" alt="Mathematics tutor" />
             <div>
               <h3>Math Tutor</h3>
-              <p>Self-employed · Nov 2022 - Present</p>
+                <p>Self-employed · November 2022 – Present</p>
             </div>
           </div>
           <p>
-            With a strong background in mathematics, I help students understand difficult concepts through
-            clear explanations, logical thinking and practical problem-solving.
+              Helping students understand complex concepts through clear explanations, analytical thinking and
+              practical problem-solving.
           </p>
         </article>
+        </div>
       </div>
+    </section>
+  );
+}
+
+function Certifications() {
+  return (
+    <section className="section certifications-section" id="certifications">
+      <SectionHeading eyebrow="Certifications" title="Verified foundations for modern data platforms.">
+        <p>Credentials in Microsoft Fabric data engineering, real-time intelligence and Databricks fundamentals.</p>
+      </SectionHeading>
+      <div className="certification-list">
+        {certifications.map((certification, index) => (
+          <article className={index === 0 ? 'certification-card certification-card--featured' : 'certification-card'} key={certification.name}>
+            <div className="certification-meta">
+              <span>{certification.issuer}</span>
+              <span>{certification.issued}</span>
+            </div>
+            <h3>{certification.name}</h3>
+            {certification.identifier ? <p className="certification-id">Identifier: {certification.identifier}</p> : null}
+            <p>{certification.description}</p>
+            {certification.url ? (
+              <a className="text-link" href={certification.url} target="_blank" rel="noopener noreferrer">
+                See credential <ArrowIcon />
+              </a>
+            ) : null}
+          </article>
+        ))}
+      </div>
+      <a className="certifications-profile-link text-link" href={contact.linkedin} target="_blank" rel="noopener noreferrer">
+        View licenses and certifications on LinkedIn <ArrowIcon />
+      </a>
     </section>
   );
 }
@@ -492,17 +604,15 @@ function Education() {
             <h3>Kaunas University of Technology</h3>
           </div>
           <p className="degree">
-            Bachelor of Applied Science, <strong>Data Science and Engineering</strong>
+            <strong>Bachelor’s in Data Science and Engineering</strong>
           </p>
-          <p>2023 - to date</p>
-          <p>
-            Coursework focused on data engineering, data analytics, databases, statistical analysis, and machine learning.
-          </p>
+          <p>2023 – Present</p>
+          <p>Coursework in data engineering, analytics, databases, statistics and machine learning.</p>
         </article>
         <article className="language-card">
           <h3>Languages</h3>
-          <p>Lithuanian - native</p>
-          <p>English - fluent</p>
+          <p>Lithuanian – Native</p>
+          <p>English – Fluent</p>
         </article>
       </div>
     </section>
@@ -522,20 +632,20 @@ function Contact() {
     <section className="section contact-section" id="contact">
       <div>
         <p className="section-label">Contact</p>
-        <h2>Open to data analyst, analytics engineer, BI, and junior data engineering roles.</h2>
+        <h2>Open to Data Engineering, Analytics Engineering, Data Analyst and BI opportunities.</h2>
       </div>
       <div className="contact-card">
         <button type="button" onClick={handleEmailCopy}>
           {emailStatus === 'Email copied' ? 'Email copied' : contact.email}
         </button>
         <a href={`tel:${contact.phone}`}>{contact.phone}</a>
-        <a href={contact.linkedin} target="_blank" rel="noreferrer">
+        <a href={contact.linkedin} target="_blank" rel="noopener noreferrer">
           LinkedIn profile
         </a>
-        <a href={contact.github} target="_blank" rel="noreferrer">
+        <a href={contact.github} target="_blank" rel="noopener noreferrer">
           GitHub profile
         </a>
-        <a href={contact.cv} target="_blank" rel="noreferrer">
+        <a href={contact.cv} target="_blank" rel="noopener noreferrer">
           Open CV
         </a>
       </div>
@@ -551,6 +661,7 @@ function App() {
         <Hero />
         <About />
         <Experience />
+        <Certifications />
         <Projects />
         <Skills />
         <Education />
