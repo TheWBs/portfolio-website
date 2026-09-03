@@ -414,9 +414,10 @@ nav a.active {
 
 .timeline-item--featured {
   padding: clamp(26px, 3vw, 38px);
-  border-color: transparent;
-  background: var(--coral);
+  border-color: rgba(36, 18, 8, 0.35);
+  background: var(--sky);
   color: var(--page);
+  box-shadow: inset 6px 0 0 var(--coral);
 }
 
 .timeline-item--technical {
@@ -437,12 +438,6 @@ nav a.active {
   color: var(--text);
   font-size: 1.2rem;
   line-height: 1.2;
-}
-
-.timeline-item--featured h3,
-.timeline-item--featured p,
-.timeline-item--featured li {
-  color: var(--page);
 }
 
 .timeline-item p,
@@ -467,6 +462,12 @@ nav a.active {
   padding-left: 16px;
   color: var(--muted);
   line-height: 1.5;
+}
+
+.timeline-item--featured h3,
+.timeline-item--featured p,
+.timeline-item--featured li {
+  color: var(--page);
 }
 
 .timeline-item li::before {
@@ -626,6 +627,12 @@ nav a.active {
 .logo-badge strong {
   color: var(--page);
   font-size: 1.55rem;
+}
+
+.logo-badge svg {
+  width: 30px;
+  height: 30px;
+  color: var(--sky);
 }
 
 .projects-section {

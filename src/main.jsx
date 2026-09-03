@@ -1,6 +1,6 @@
 import { Fragment, useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
-import { ArrowUpRight } from '@phosphor-icons/react';
+import { ArrowUpRight, Database } from '@phosphor-icons/react';
 import '@fontsource-variable/newsreader';
 import '@fontsource-variable/jetbrains-mono';
 import './styles.css';
@@ -458,7 +458,7 @@ function Experience() {
         <div className="technical-experience">
           <article className="timeline-item timeline-item--featured">
             <div className="timeline-heading">
-              <LogoBadge text="DE" alt="Data Engineering role" tone="dark" />
+              <LogoBadge icon={Database} alt="Data Engineering role" tone="dark" />
               <div>
                 <h3>Data Engineer</h3>
                 <p>Stealth Startup · July 2026 – Present</p>
@@ -509,7 +509,7 @@ function Experience() {
             <LogoBadge text="π" alt="Mathematics tutor" />
             <div>
               <h3>Math Tutor</h3>
-                <p>Self-employed · November 2022 – Present</p>
+                <p>Self-employed · November 2022 – May 2026</p>
             </div>
           </div>
           <p>
@@ -554,10 +554,10 @@ function Certifications() {
   );
 }
 
-function LogoBadge({ src, alt, text, tone = 'light' }) {
+function LogoBadge({ src, alt, text, icon: Icon, tone = 'light' }) {
   return (
     <span className={`logo-badge ${tone === 'dark' ? 'logo-badge-dark' : ''}`} aria-label={alt}>
-      {src ? <img src={src} alt={alt} loading="eager" /> : <strong>{text}</strong>}
+      {src ? <img src={src} alt={alt} loading="eager" /> : Icon ? <Icon aria-hidden="true" weight="duotone" /> : <strong>{text}</strong>}
     </span>
   );
 }
