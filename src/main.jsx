@@ -21,7 +21,7 @@ const logos = {
   kasp: asset('assets/logos/kasp-logo.svg'),
 };
 
-const profilePhoto = asset('assets/profile/profile.png');
+const profilePhoto = asset('assets/profile/profile.jpg');
 
 const hardSkills = [
   {
